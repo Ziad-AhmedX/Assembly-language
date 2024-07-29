@@ -1,0 +1,88 @@
+global _start  ;declare entry point
+ 
+ section .bss
+num resb 6
+
+
+
+section .data
+
+i_msg db "Enter ur number : "  
+len_i equ $ - i_msg ;to calc length 
+o_msg db "your number is : "
+len_o equ $ - o_msg 
+ 
+
+ 
+ section .text
+ 
+
+ _start:
+       mov edx,len_i    ;msg length
+       mov ecx,i_msg ;
+       mov ebx,1      ;stdout 
+       mov eax,4      ;sys_call_number(write)
+
+         int 0x80   ;call kernal
+  
+       mov eax,3
+       mov ebx,2   
+       mov ecx,num
+       mov edx,5
+
+         int 0x80
+
+       mov eax,4
+       mov ebx,1
+       mov ecx,o_msg
+       mov edx,len_o
+
+        int 80h
+
+       mov eax,4
+       mov ebx,1
+       mov ecx,num
+       mov edx,5
+
+        int 80h
+
+      
+
+        mov eax,1 
+        mov ebx,0   ;exit code 
+        int 0x80   
+
+
+
+z@z-VM:~/Documents/output$  nasm -f elf32 test.s -o test.o
+z@z-VM:~/Documents/output$ ld -m elf_i386 test.o -o test
+z@z-VM:~/Documents/output$ ./test
+Enter ur number : 10
+your number is : 10
+z@z-VM:~/Documents/output$ echo $?
+0
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
