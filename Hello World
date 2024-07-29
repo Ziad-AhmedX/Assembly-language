@@ -7,7 +7,7 @@ global _start  ;declare entry point
  _start:
 mov edx,len    ;msg length
 mov ecx,,msg ;msg to write (msg or addres)
-mov ebx,1      ;move 1 to ebx 
+mov ebx,1      ;Stdout 
 mov eax,4      ;sys_call_number(write)
 
 int 0x80   ;call kernal
