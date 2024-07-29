@@ -1,0 +1,44 @@
+global _start  ;declare entry point
+ 
+ 
+ section .text
+ 
+
+ _start:
+mov edx,len    ;msg length
+mov ecx,,msg ;msg to write (msg or addres)
+mov ebx,1      ;move 1 to ebx 
+mov eax,4      ;sys_call_number(write)
+
+int 0x80   ;call kernal
+mov eax,1  ;sys_call_number(sys_exit)
+
+int 0x80   ;call kernal (to exit) 
+
+
+section .data
+
+addres:
+msg db "hello world",0xa   ;0xa --> new line
+len equ $ - msg ;to calc length  (u can write msg or address)
+
+
+;<------------------------------------------------------------>
+;z@z-VM:~/Documents/output$ nasm -f elf32 test.s -o test.o
+;z@z-VM:~/Documents/output$ ld -m elf_i386 test.o -o test
+;z@z-VM:~/Documents/output$ ./test
+;hello world
+;<------------------------------------------------------------>
+
+
+
+
+
+
+
+
+
+
+
+
+
